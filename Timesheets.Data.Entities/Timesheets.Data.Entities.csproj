@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Data.Entities\Data.Entities.csproj" />
+    <ProjectReference Include="..\src\Employees.Data.Entities\Employees.Data.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

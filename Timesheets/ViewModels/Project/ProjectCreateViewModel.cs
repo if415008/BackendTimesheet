@@ -14,6 +14,10 @@ namespace Timesheets.ViewModels.Project
         [Required()]
         public string ClientName { get; set; }
 
+        public DateTimeOffset StartDate { get; set; }
+
+        public DateTimeOffset DueDate { get; set; }
+
         [Display(Name = "Project Status")]
         [Required()]
         public string ProjectStatus { get; set; }
@@ -24,6 +28,8 @@ namespace Timesheets.ViewModels.Project
             {
                 ProjectName = this.ProjectName,
                 ClientName = this.ClientName,
+                StartDate = DateTime.Now,
+                DueDate = this.DueDate,
                 ProjectStatus = this.ProjectStatus
             };
         }

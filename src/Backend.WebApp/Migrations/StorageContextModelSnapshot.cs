@@ -15,7 +15,7 @@ namespace Backend.WebApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -63,12 +63,20 @@ namespace Backend.WebApp.Migrations
                         .IsRequired()
                         .HasMaxLength(64);
 
+                    b.Property<int>("EmployeeId");
+
                     b.Property<DateTimeOffset?>("Modified");
 
                     b.Property<string>("ModifiedBy")
                         .HasMaxLength(64);
 
+                    b.Property<int>("ProjectId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("EmployeeDetails");
                 });
@@ -130,11 +138,15 @@ namespace Backend.WebApp.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasMaxLength(64);
 
+                    b.Property<int>("ProjectId");
+
                     b.Property<int>("SprintNumber");
 
                     b.Property<DateTimeOffset>("StartDate");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Sprints");
                 });
@@ -156,11 +168,15 @@ namespace Backend.WebApp.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasMaxLength(64);
 
+                    b.Property<int>("SprintId");
+
                     b.Property<string>("TaskName")
                         .IsRequired()
                         .HasMaxLength(225);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SprintId");
 
                     b.ToTable("Tasks");
                 });
@@ -177,6 +193,8 @@ namespace Backend.WebApp.Migrations
                         .IsRequired()
                         .HasMaxLength(64);
 
+                    b.Property<int>("EmployeeId");
+
                     b.Property<DateTimeOffset>("EndTime");
 
                     b.Property<DateTimeOffset?>("Modified");
@@ -184,7 +202,13 @@ namespace Backend.WebApp.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasMaxLength(64);
 
+                    b.Property<int>("ProjectId");
+
+                    b.Property<int>("SprintId");
+
                     b.Property<DateTimeOffset>("StartTime");
+
+                    b.Property<int>("TaskId");
 
                     b.Property<DateTimeOffset>("TimesheetDate");
 
@@ -194,7 +218,46 @@ namespace Backend.WebApp.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmployeeId");
+
                     b.ToTable("Timesheets");
+                });
+
+            modelBuilder.Entity("Timesheets.Data.Entities.EmployeeDetail", b =>
+                {
+                    b.HasOne("Employees.Data.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Timesheets.Data.Entities.Project", "Project")
+                        .WithMany("EmployeeDetails")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Timesheets.Data.Entities.Sprint", b =>
+                {
+                    b.HasOne("Timesheets.Data.Entities.Project", "Project")
+                        .WithMany("Sprints")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Timesheets.Data.Entities.Task", b =>
+                {
+                    b.HasOne("Timesheets.Data.Entities.Sprint", "Sprint")
+                        .WithMany("Tasks")
+                        .HasForeignKey("SprintId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Timesheets.Data.Entities.Timesheet", b =>
+                {
+                    b.HasOne("Employees.Data.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

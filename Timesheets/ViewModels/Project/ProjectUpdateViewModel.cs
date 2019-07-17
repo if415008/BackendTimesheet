@@ -10,12 +10,16 @@ namespace Timesheets.ViewModels.Project
         private readonly Data.Entities.Project _entity;
         public string ProjectName { get; set; }
         public string ClientName { get; set; }
+        public DateTimeOffset StartDate { get; set; }
+        public DateTimeOffset DueDate { get; set; }
         public string ProjectStatus { get; set; }
 
         internal Data.Entities.Project ToEntity(Data.Entities.Project entity, string username)
         {
             entity.ProjectName = this.ProjectName;
             entity.ClientName = this.ClientName;
+            entity.StartDate = this.StartDate;
+            entity.DueDate = DateTime.Now;
             entity.ProjectStatus = this.ProjectStatus;
             entity.Modified = DateTime.Now;
             entity.ModifiedBy = username;

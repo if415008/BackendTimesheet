@@ -6,8 +6,6 @@ namespace Timesheets.ViewModels.Timesheet
 {
     public class TimesheetCreateViewModel
     {
-        [Display(Name = "Timesheet Date")]
-        [Required()]
         public DateTimeOffset TimesheetDate { get; set; }
         public DateTimeOffset StartTime { get; set; }
         public DateTimeOffset EndTime { get; set; }

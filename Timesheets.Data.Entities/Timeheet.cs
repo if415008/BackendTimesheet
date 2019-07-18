@@ -15,7 +15,7 @@ namespace Timesheets.Data.Entities
 
         //Database Relation
         public int EmployeeId { get; set; }
-        public virtual Employee Employee { get; set; }
+        //public virtual Employee Employee { get; set; }
         public int ProjectId { get; set; }
         public int SprintId { get; set; }
         public int TaskId { get; set; }

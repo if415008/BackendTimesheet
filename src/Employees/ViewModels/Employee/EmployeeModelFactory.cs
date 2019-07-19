@@ -10,11 +10,11 @@ namespace Employees.ViewModels.Employee
         {
         }
 
-        internal EmpIndexViewModel LoadAll(IStorage storage, int page, int size)
+        internal EmployeeIndexViewModel LoadAll(IStorage storage, int page, int size)
         {
             var employeeRepo = storage.GetRepository<IEmployeeRepository>();
 
-            return new EmpIndexViewModel(employeeRepo.All(page, size));
+            return new EmployeeIndexViewModel(employeeRepo.All(page, size));
         }
     }
 }

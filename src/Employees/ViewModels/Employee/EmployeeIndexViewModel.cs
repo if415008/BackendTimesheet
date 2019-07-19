@@ -3,9 +3,9 @@ using Employees.Data.Entities;
 
 namespace Employees.ViewModels.Employee
 {
-    public class EmpIndexViewModel
+    public class EmployeeIndexViewModel
     {
-        public EmpIndexViewModel(IEnumerable<Data.Entities.Employee> data)
+        public EmployeeIndexViewModel(IEnumerable<Data.Entities.Employee> data)
         {
             Employees = data ?? new List<Data.Entities.Employee>();
         }

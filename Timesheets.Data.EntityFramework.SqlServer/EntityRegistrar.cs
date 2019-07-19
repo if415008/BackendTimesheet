@@ -55,6 +55,9 @@ namespace Timesheets.Data.EntityFramework.SqlServer
 
                 etb.Property(p => p.TaskName).HasMaxLength(225).IsRequired();
 
+                //Database Relation
+                etb.HasMany(m => m.Timesheets).WithOne(w => w.Task).HasForeignKey(f => f.TaskId);
+
                 etb.Property(e => e.Id).ValueGeneratedOnAdd();
             });
         }

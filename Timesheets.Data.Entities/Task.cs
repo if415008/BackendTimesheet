@@ -11,5 +11,6 @@ namespace Timesheets.Data.Entities
         //Database Relation
         public int SprintId { get; set; }
         public virtual Sprint Sprint { get; set; }
+        public ICollection<Timesheet> Timesheets { get; set; }
     }
 }

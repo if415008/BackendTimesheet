@@ -9,12 +9,14 @@ namespace Timesheets.ViewModels.Task
         [Display(Name = "Task Name")]
         [Required()]
         public string TaskName { get; set; }
+        public int SprintId { get; set; }
 
         internal Data.Entities.Task ToEntity()
         {
             return new Data.Entities.Task
             {
-                TaskName = this.TaskName
+                TaskName = this.TaskName,
+                SprintId = this.SprintId
             };
         }
     }
